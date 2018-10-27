@@ -14,14 +14,10 @@
     
     // Updates clock
     function runTheClock(){
-        date = new Date();
-        hr = date.getHours();
-        min = date.getMinutes();
-        sec = date.getSeconds();
         
-        hrPosition = (hr * 30) + (min / 2);
-        minPosition = (min * 6) + (sec / 10);
-        secPosition = sec * 6;
+        hrPosition += 1/120;
+        minPosition += 1/10;
+        secPosition += 6;
 
         HOURHAND.style.transform = "rotate(" + hrPosition + "deg)";
         MINUTEHAND.style.transform = "rotate(" + minPosition + "deg)";
@@ -29,7 +25,7 @@
         console.log("Hour: " + hr + " Minute: " + min + " Second: " + sec);
     }
     
-    // Reruns script every 1000 milliseconds
+    // Reruns script every 1000 
     var interval = setInterval(runTheClock, 1000);
 
 
