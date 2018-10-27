@@ -4,6 +4,7 @@
     const SECONDHAND = document.querySelector("#second");
 
     var date = new Date();
+    var positions = [0, 0, 0];
     let hr = date.getHours();
     let min = date.getMinutes();
     let sec = date.getSeconds();
@@ -15,9 +16,28 @@
     // Updates clock
     function runTheClock(){
         
-        hrPosition += 1/120;
-        minPosition += 1/10;
-        secPosition += 6;
+        date = new Date();
+        hr = date.getHours();
+        min = date.getMinutes();
+        sec = date.getSeconds();
+        
+        // Counts number of cycles around clock
+        if (hr === 0){
+            positions[0]++;
+        }
+        
+        if (min === 0){
+            positions[1]++;
+        }
+        
+        if (sec === 0){
+            positions[2]++;
+        }
+        
+
+        hrPosition = (positions[0] * 360) + (hr * 30) + (min / 2);
+        minPosition = (positions[1] * 360) + (min * 6) + (sec / 10);
+        secPosition = (positions[2] * 360) + (sec * 6);
 
         HOURHAND.style.transform = "rotate(" + hrPosition + "deg)";
         MINUTEHAND.style.transform = "rotate(" + minPosition + "deg)";
@@ -25,7 +45,7 @@
         console.log("Hour: " + hr + " Minute: " + min + " Second: " + sec);
     }
     
-    // Reruns script every 1000 
+    // Reruns script every 1000 milliseconds
     var interval = setInterval(runTheClock, 1000);
 
 
